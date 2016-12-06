@@ -1,0 +1,38 @@
+var ecDreapta = function(x, y, x1, y1, x2, y2) {
+	return x*y1 + x1*y2 + x2*y - y1*x2 - x*y2 - y*x1;
+}
+
+var perimetru = function(x1, y1, x2, y2, x3, y3) {
+	return Math.abs(ecDreapta(x1, y1, x2, y2, x3, y3)) / 2;
+}
+
+var punct = function(x, y){
+	this.x = x;
+	this.y = y;
+}
+
+var a1 = new punct(-1,-1);
+var a2 = new punct(-1,-2);
+var a3 = new punct(-3,-1);
+var a4 = new punct(1,1);
+
+if (ecDreapta(a3.x, a3.y, a1.x, a1.y, a2.x, a2.y) * ecDreapta(a4.x, a4.y, a1.x, a1.y, a2.x, a2.y) > 0 &&
+	ecDreapta(a1.x, a1.y, a2.x, a2.y, a3.x, a3.y) * ecDreapta(a4.x, a4.y, a2.x, a2.y, a3.x, a3.y) > 0 &&
+	ecDreapta(a1.x, a1.y, a3.x, a3.y, a4.x, a4.y) * ecDreapta(a2.x, a2.y, a3.x, a3.y, a4.x, a4.y) > 0 &&
+	ecDreapta(a2.x, a2.y, a1.x, a1.y, a4.x, a4.y) * ecDreapta(a3.x, a3.y, a1.x, a1.y, a4.x, a4.y) > 0) {
+	alert("convex");
+} else {
+	alert("nu e convex");
+}
+
+var m = new punct(-1.5, -1.5);
+
+if( perimetru(a1.x, a1.y, a2.x, a2.y, a3.x, a3.y) == perimetru(a1.x, a1.y, a2.x, a2.y, m.x, m.y) + perimetru(a1.x, a1.y, a3.x, a3.y, m.x, m.y) + perimetru(a3.x, a3.y, a2.x, a2.y, m.x, m.y) ||
+	perimetru(a1.x, a1.y, a2.x, a2.y, a4.x, a4.y) == perimetru(a1.x, a1.y, a2.x, a2.y, m.x, m.y) + perimetru(a1.x, a1.y, a4.x, a4.y, m.x, m.y) + perimetru(a4.x, a4.y, a2.x, a2.y, m.x, m.y) ||
+	perimetru(a4.x, a4.y, a2.x, a2.y, a3.x, a3.y) == perimetru(a4.x, a4.y, a2.x, a2.y, m.x, m.y) + perimetru(a4.x, a4.y, a3.x, a3.y, m.x, m.y) + perimetru(a3.x, a3.y, a2.x, a2.y, m.x, m.y) ||
+	perimetru(a1.x, a1.y, a4.x, a4.y, a3.x, a3.y) == perimetru(a1.x, a1.y, a4.x, a4.y, m.x, m.y) + perimetru(a1.x, a1.y, a3.x, a3.y, m.x, m.y) + perimetru(a3.x, a3.y, a4.x, a4.y, m.x, m.y)) {
+
+	alert("este in acoperirea convexa");
+} else {
+	alert("nu este in acoperirea convexa");
+}
